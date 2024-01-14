@@ -1,6 +1,16 @@
 import tkinter as tk
+import tkinter.filedialog as tfd
 
 PATH=r"C:\Users\49176\OneDrive\Рабочий стол\Python\note\\"
+
+#functions
+def read():
+    filename=tfd.askopenfilename()
+    with open(file=filename,mode="r",encoding="utf-8") as file:
+        contentText.insert(1.0,file.read())
+
+
+
 #window
 window=tk.Tk()
 window.title("Notes")
@@ -21,7 +31,7 @@ newfileicon=tk.PhotoImage(file=PATH+"new_file.gif")
 openfileicon=tk.PhotoImage(file=PATH+"open_file.gif")
 savefileicon=tk.PhotoImage(file=PATH+"save_file.gif")
 filemenu.add_command(label="New File",image=newfileicon, compound="left")
-filemenu.add_command(label="Open File",image=openfileicon,compound="left")
+filemenu.add_command(label="Open File",image=openfileicon,compound="left",command=read)
 filemenu.add_command(label="Save",image=savefileicon,compound="left")
 filemenu.add_command(label="Save as",image=savefileicon,compound="left")
 
