@@ -5,15 +5,24 @@ PATH=r"C:\Users\Nikita-Wlad\Desktop\Python\notes\\"
 
 #functions
 def read():
+    global filename
     filename=tfd.askopenfilename()
     with open(file=filename,mode="r",encoding="utf-8") as file:
         contentText.insert(1.0,file.read())
 
 def new_file():
+    global filename
     contentText.delete(1.0,"end")
 
-def save():
+def saveAs():
+    global filename
     filename=tfd.asksaveasfilename()
+    with open(file=filename,mode="w",encoding="utf-8") as file:
+        content=contentText.get(1.0,"end")
+        file.write(content)
+
+def save():
+    global filename
     with open(file=filename,mode="w",encoding="utf-8") as file:
         content=contentText.get(1.0,"end")
         file.write(content)
@@ -24,6 +33,8 @@ def save():
 window=tk.Tk()
 window.title("Notes")
 window.geometry("400x400")
+
+filename=""
 
 #textfield
 contentText=tk.Text(window,wrap="word")
@@ -42,7 +53,7 @@ savefileicon=tk.PhotoImage(file=PATH+"save_file.gif")
 filemenu.add_command(label="New File",image=newfileicon, compound="left",command=new_file)
 filemenu.add_command(label="Open File",image=openfileicon,compound="left",command=read)
 filemenu.add_command(label="Save",image=savefileicon,compound="left",command=save)
-filemenu.add_command(label="Save as",image=savefileicon,compound="left",command=save)
+filemenu.add_command(label="Save as",image=savefileicon,compound="left",command=saveAs)
 
 
 
